@@ -1,7 +1,7 @@
 import { View, Text, TextInput, ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import styles from './styles'
-import colors from '../../assets/theme/colors'
+import colors from '../../../assets/theme/colors'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const CustomButton = ({ title, primary, secondary, danger, succes, disabled, loading, onPress, ...props }) => {

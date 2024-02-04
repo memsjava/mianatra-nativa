@@ -5,11 +5,11 @@ import Input from '../common/Input';
 import CustomButton from '../common/CustomButton';
 import { Image } from 'react-native';
 import styles from './styles';
-import { REGISTER } from '../../constants/routeNames';
+import { LOGIN, REGISTER } from '../../constants/routeNames';
 import { useNavigation } from '@react-navigation/core';
 
-const LoginComponent = () => {
-    const [text, onChangeText] = useState('');
+const RegisterComponent = ({ onChange, onSubmit, form, errors }) => {
+
     const { navigate } = useNavigation();
 
     return (
@@ -21,13 +21,36 @@ const LoginComponent = () => {
                     Welcome man
                 </Text>
                 <Text style={styles.subtitle}>
-                    Please log in here man!
+                    Create a free account
                 </Text>
                 <View style={styles.loginForm}>
                     <Input
                         label="Username"
                         iconPosition="right"
                         placeholder="Enter username"
+                        onChangeText={(value) => onChange({ name: "userName", value })}
+                        error={errors.userName}
+                    />
+                    <Input
+                        label="First name"
+                        iconPosition="right"
+                        placeholder="Rabemampiandra"
+                        onChangeText={(value) => onChange({ name: "firstName", value })}
+                        error={errors.firstName}
+                    />
+                    <Input
+                        label="Last name"
+                        iconPosition="right"
+                        placeholder="Eric"
+                        onChangeText={(value) => onChange({ name: "lastName", value })}
+                        error={errors.lastName}
+                    />
+                    <Input
+                        label="Email"
+                        iconPosition="right"
+                        placeholder="memsjava@gmail.com"
+                        onChangeText={(value) => onChange({ name: "email", value })}
+                        error={errors.email}
                     />
                     <Input
                         label="Password"
@@ -35,18 +58,21 @@ const LoginComponent = () => {
                         iconPosition="right"
                         placeholder="********"
                         secureTextEntry={true}
+                        onChangeText={(value) => onChange({ name: "password", value })}
+                        error={errors.password}
                     />
                     <CustomButton
                         primary
                         title="Submit"
+                        onPress={onSubmit}
                     />
                     <View style={styles.createSection}>
                         <Text style={styles.infoText}>
-                            Need new account?
+                            Already have account?
                         </Text>
-                        <TouchableOpacity onPress={() => { navigate(REGISTER) }}>
+                        <TouchableOpacity onPress={() => { navigate(LOGIN) }}>
                             <Text style={styles.linkButton}>
-                                Register
+                                Sign in
                             </Text>
 
                         </TouchableOpacity>
@@ -61,4 +87,4 @@ const LoginComponent = () => {
     )
 }
 
-export default LoginComponent;
+export default RegisterComponent;

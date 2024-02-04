@@ -1,7 +1,7 @@
 import { View, Text, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import styles from './styles'
-import colors from '../../assets/theme/colors'
+import colors from '../../../assets/theme/colors'
 
 const Input = ({ style, icon, iconPosition, onChangeText, value, label, error, ...props }) => {
     const [focused, setFocused] = useState(false)
