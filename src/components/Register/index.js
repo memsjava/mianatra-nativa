@@ -8,7 +8,7 @@ import styles from './styles';
 import { LOGIN, REGISTER } from '../../constants/routeNames';
 import { useNavigation } from '@react-navigation/core';
 
-const RegisterComponent = ({ onChange, onSubmit, form, errors }) => {
+const RegisterComponent = ({ onChange, onSubmit, form, errors, loading }) => {
 
     const { navigate } = useNavigation();
 
@@ -65,6 +65,7 @@ const RegisterComponent = ({ onChange, onSubmit, form, errors }) => {
                         primary
                         title="Submit"
                         onPress={onSubmit}
+                        loading={loading}
                     />
                     <View style={styles.createSection}>
                         <Text style={styles.infoText}>

@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import RegisterComponent from "../../components/Register";
+import register from "../../context/actions/auth/register";
+import { GlobalContext } from "../../context/Provider";
 
 
 const SignUp = () => {
     const [form, setForm] = useState({});
     const [errors, setErrors] = useState({});
+
+    const { authDispatch, authState: { error, loading } } = useContext(GlobalContext);
 
     const onChange = ({ name, value }) => {
         setForm({ ...form, [name]: value })
@@ -51,6 +55,13 @@ const SignUp = () => {
                 return { ...prev, password: "Please fill this field" }
             })
         }
+
+        if (
+            Object.values(form).length === 5 &&
+            Object.values(form).every(item => item.trim('').length > 0)
+        ) {
+            register(form)(authDispatch);
+        }
     }
     return (
         <RegisterComponent
@@ -58,6 +69,7 @@ const SignUp = () => {
             onSubmit={onSubmit}
             form={form}
             errors={errors}
+            loading={loading}
         />
     )
 };
