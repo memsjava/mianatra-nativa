@@ -16,9 +16,12 @@ const auth = (state, { type, payload }) => {
         case REGISTER_FAIL:
             return {
                 ...state,
-                loading: false,
-                error: payload
+                data: null,
+                error: null,
+                loading: false
             };
+        case CLEAR_AUTH_STATE:
+
         default:
             return state;
     }

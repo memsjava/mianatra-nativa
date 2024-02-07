@@ -7,6 +7,7 @@ import { Image } from 'react-native';
 import styles from './styles';
 import { REGISTER } from '../../constants/routeNames';
 import { useNavigation } from '@react-navigation/core';
+import Message from '../common/Message';
 
 const LoginComponent = () => {
     const [text, onChangeText] = useState('');
@@ -16,13 +17,19 @@ const LoginComponent = () => {
         <Container>
 
             <Image style={styles.logoImage} source={require('../../assets/images/logo.png')} />
-            <View>
+            <View >
                 <Text style={styles.title}>
                     Welcome man
                 </Text>
                 <Text style={styles.subtitle}>
                     Please log in here man!
                 </Text>
+                <Message retry
+                    retryFn={() => { console.log('hello word') }}
+                    onDismiss={() => {
+                        console.log('dismiss')
+                    }}
+                    succes message={"message na hafatra"} />
                 <View style={styles.loginForm}>
                     <Input
                         label="Username"
