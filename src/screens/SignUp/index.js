@@ -75,9 +75,12 @@ const SignUp = () => {
     }, [data])
     useFocusEffect(
         React.useCallback(() => {
-            if (data || error) {
-                clearAuthState()(dispatch);
+            return () => {
+                if (data || error) {
+                    clearAuthState()(authDispatch);
+                }
             }
+
         }, [data, error])
     );
     return (

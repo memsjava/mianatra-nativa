@@ -9,7 +9,7 @@ import { REGISTER } from '../../constants/routeNames';
 import { useNavigation } from '@react-navigation/core';
 import Message from '../common/Message';
 
-const LoginComponent = () => {
+const LoginComponent = ({ onChange, onSubmit, form, errors, error, loading }) => {
     const [text, onChangeText] = useState('');
     const { navigate } = useNavigation();
 
@@ -24,17 +24,21 @@ const LoginComponent = () => {
                 <Text style={styles.subtitle}>
                     Please log in here man!
                 </Text>
-                <Message retry
-                    retryFn={() => { console.log('hello word') }}
-                    onDismiss={() => {
-                        console.log('dismiss')
-                    }}
-                    succes message={"message na hafatra"} />
+                {
+                    error?.error && <Message
+                        onDismiss={() => {
+                            console.log('dismiss')
+                        }}
+                        danger message={error.error} />
+                }
+
                 <View style={styles.loginForm}>
                     <Input
                         label="Username"
                         iconPosition="right"
                         placeholder="Enter username"
+                        onChangeText={(value) => onChange({ name: "userName", value })}
+                        error={errors.userName || error?.username?.[0]}
                     />
                     <Input
                         label="Password"
@@ -42,10 +46,14 @@ const LoginComponent = () => {
                         iconPosition="right"
                         placeholder="********"
                         secureTextEntry={true}
+                        onChangeText={(value) => onChange({ name: "password", value })}
+                        error={errors.password || error?.password?.[0]}
                     />
                     <CustomButton
                         primary
                         title="Submit"
+                        onPress={onSubmit}
+                        loading={loading}
                     />
                     <View style={styles.createSection}>
                         <Text style={styles.infoText}>

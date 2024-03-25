@@ -1,7 +1,9 @@
 import { StyleSheet } from "react-native";
 import colors from "../../assets/theme/colors";
+import { ScaledSheet } from 'react-native-size-matters';
 
-export default StyleSheet.create({
+
+export default ScaledSheet.create({
     logoImage: {
         height: 140,
         width: 140,

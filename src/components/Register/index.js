@@ -7,6 +7,7 @@ import { Image } from 'react-native';
 import styles from './styles';
 import { LOGIN } from '../../constants/routeNames';
 import { useNavigation } from '@react-navigation/core';
+import Message from '../common/Message';
 
 const RegisterComponent = ({ onChange, onSubmit, form, errors, error, loading }) => {
 
@@ -25,7 +26,14 @@ const RegisterComponent = ({ onChange, onSubmit, form, errors, error, loading })
                 </Text>
                 <View style={styles.loginForm}>
                     {console.log(error, form)}
-                    {error?.error && <Text>{error.error}</Text>}
+                    {error?.error &&
+                        <Message retry
+                            retryFn={() => { console.log('hello word') }}
+                            onDismiss={() => {
+                                console.log('dismiss')
+                            }}
+                            danger message={error.error} />
+                    }
                     <Input
                         label="Username"
                         iconPosition="right"
@@ -77,15 +85,10 @@ const RegisterComponent = ({ onChange, onSubmit, form, errors, error, loading })
                             <Text style={styles.linkButton}>
                                 Sign in
                             </Text>
-
                         </TouchableOpacity>
                     </View>
                 </View>
-
             </View>
-
-
-
         </Container>
     )
 }
